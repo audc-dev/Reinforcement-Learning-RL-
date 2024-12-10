@@ -1,116 +1,47 @@
---------------------------------
-# Introduction
---------------------------------
+# Apprentissage-Par-Renforcement
 
-```bash
-C:\Python27\python gridworld.py -a value -i 100 -k 10
-```
+---------------------------------
+# Séance 1 
+---------------------------------
 
-🚀 **Cette commande exécute :**
+## Récap - théorie
 
-- **Algorithme :** 🧠 **Itération de Valeur** (`-a value`)
-- **Itérations :** 🔄 **100 itérations** pour évaluer les valeurs des états (`-i 100`)
-- **Épisodes :** 🎮 **10 épisodes** seront lancés (`-k 10`)
+- Mots clés liés aux processus de Markov dans le contexte de l’apprentissage par renforcement (RL) :
 
----------------------------------------------------------
+1. **Processus markovien** :
+   - Un processus stochastique où la probabilité de transition vers l’état suivant ne dépend que de l’état actuel, et non de l’historique des états précédents (propriété de Markov).
 
-```bash
-C:\Python27\python gridworld.py -a value -i 100 -k 10 --livingReward -2
-```
+2. **État (State)** :
+   - La représentation actuelle d'une situation dans l'environnement. L'état contient toutes les informations nécessaires pour prendre une décision à ce moment-là.
 
-🚀 **Détails de cette commande :**
+3. **Récompense (Reward)** :
+   - Un signal de rétroaction reçu après avoir exécuté une action dans un certain état. Il indique la qualité de l'action choisie.
 
-- **Algorithme :** 🧠 **Itération de Valeur** (`-a value`)
-- **Itérations :** 🔄 **100 itérations** pour évaluer les valeurs des états (`-i 100`)
-- **Épisodes :** 🎮 **10 épisodes**
-- **Récompense de Survie :** 🎁 **-2** (`--livingReward -2`)
+4. **Environnement (Environment)** :
+   - Le monde extérieur dans lequel l'agent évolue. C'est l'entité avec laquelle l'agent interagit en prenant des actions et en recevant des états et des récompenses.
 
----------------------------------------------------------
+5. **Agent** :
+   - L’entité qui prend des décisions (choisit des actions) dans l’environnement dans le but d’optimiser une fonction de récompense.
 
-```bash
-C:\Python27\python gridworld.py -a value -i 10 -k 2 --livingReward -2
-```
+6. **Action** :
+   - Un choix fait par l’agent dans un certain état qui conduit à un nouvel état. L'agent choisit une action en fonction d'une **policy**.
 
-💡 **Explication :**
+7. **Policy (Politique)** :
+   - Une règle ou une stratégie que l'agent suit pour choisir une action en fonction de l'état actuel. La politique peut être déterministe ou stochastique.
 
-- **Algorithme :** 🧠 **Itération de Valeur** (`-a value`)
-- **Itérations :** 🔄 **10 mises à jour** des états
-- **Épisodes :** 🎮 **2 épisodes**
-- **Récompense de Survie :** 🎁 **-2**
+8. **Utilité (Utility)** :
+   - La valeur attendue à long terme d’un état, souvent représentée par la somme pondérée des récompenses futures. Dans l'apprentissage par renforcement, cela peut correspondre à la **fonction de valeur**.
 
----------------------------------------------------------
+9. **Discount (Facteur d'actualisation)** :
+   - Un facteur (généralement noté γ) utilisé pour réduire l’importance des récompenses futures par rapport aux récompenses immédiates. Il permet d’équilibrer l'exploration et l'exploitation des états.
 
-# ⚡ Différence entre Itérations et Épisodes ⚡
+Ces termes sont essentiels pour comprendre les bases de l'apprentissage par renforcement et comment un agent interagit avec son environnement dans le cadre des processus markoviens.
 
-| 🔍 **Critère**          | 🔄 **Itérations**                        | 🎮 **Épisodes**                                   |
-|-------------------------|------------------------------------------|--------------------------------------------------|
-| **Définition**           | Nombre de fois que les valeurs des états sont mises à jour | Nombre de fois que l'agent interagit avec l'environnement |
-| **Algorithme affecté**   | Itération de Valeur, Q-learning          | Interactions directes dans l'environnement       |
-| **Objectif**             | Améliorer les estimations des états      | Tester la politique sur plusieurs épisodes       |
-| **Convergence**          | Plus d'itérations = meilleures estimations | Plus d'épisodes = meilleure évaluation de la politique |
+---------------------------
+## Pratiques
+----------------------------
 
----------------------------------------------------------
-
-
---------------------------------
-# Exercice 
---------------------------------
-
-```bash
-C:\Python27\python gridworld.py -a value -i 1
-C:\Python27\python gridworld.py -a value -i 2
-C:\Python27\python gridworld.py -a value -i 3
-C:\Python27\python gridworld.py -a value -i 5
-C:\Python27\python gridworld.py -a value -i 7
-C:\Python27\python gridworld.py -a value -i 12
-C:\Python27\python gridworld.py -a value -i 100
-```
-
-🚀 **Ces commandes exécutent :**
-
-- **Algorithme :** 🧠 **Itération de Valeur** (`-a value`)
-- **Itérations :** 🔄 Effectue 1, 2, 3, 5, 7, 12, ou 100 itérations selon la commande pour évaluer les valeurs des états.
-
----------------------------------------------------------
-
-```bash
-C:\Python27\python gridworld.py -a value -i 100 -k 10
-C:\Python27\python gridworld.py -a value -i 1 -k 2 --livingReward -2
-C:\Python27\python gridworld.py -a value -i 2 -k 2 --livingReward -2
-C:\Python27\python gridworld.py -a value -i 10 -k 2 --livingReward -2
-C:\Python27\python gridworld.py -a value -i 10 -k 2 --livingReward 2
-```
-
-🚀 **Ces commandes exécutent :**
-
-- **Algorithme :** 🧠 **Itération de Valeur** (`-a value`)
-- **Itérations et Épisodes :**
-  - 🔄 100 itérations, 🎮 10 épisodes (`-i 100 -k 10`)
-  - 🔄 1 ou 2 ou 10 itérations avec 🎮 2 épisodes et différentes **récompenses de survie** (`--livingReward -2 ou 2`).
-
----------------------------------------------------------
-
-```bash
-C:\Python27\python gridworld.py -a value -i 12 -k 2 --livingReward -0.01
-C:\Python27\python gridworld.py -a value -i 12 -k 2 --livingReward -0.03
-C:\Python27\python gridworld.py -a value -i 12 -k 2 --livingReward -0.4
-C:\Python27\python gridworld.py -a value -i 12 -k 2 --livingReward -2.0
-C:\Python27\python gridworld.py -a value -i 12 -k 2 --livingReward 2.0
-```
-
-🚀 **Ces commandes exécutent :**
-
-- **Algorithme :** 🧠 **Itération de Valeur** (`-a value`)
-- **Itérations :** 🔄 12 itérations avec 🎮 2 épisodes.
-- **Récompenses de Survie :** 🎁 Valeurs variant de -0.01 à 2.0 (`--livingReward`).
-
----------------------------------------------------------
-
-### Explication des commandes supplémentaires :
-
-1. **Nombre d'itérations** :
-   - **Itérations** définissent combien de fois l'algorithme actualise les valeurs des états pour mieux estimer les futurs gains.
-
-2. **Nombre d'épisodes** :
-   - **Épisodes** représentent le nombre d'interactions de l'agent avec l'environnement pour appliquer les décisions basées sur les valeurs d'états calculées.
-
+- Pratique 01 dans le dossier 01-introduction-au-RL
+- Pratique 02 dans le dossier 02-notions-RL
+- Pratique 03 (Document 06-Discounting.md) dans le dossier 03-introduction au proccessus décisionnel de Markov
+- Toutes les pratiques dans le dossier 04-EvaluationsFormatives
